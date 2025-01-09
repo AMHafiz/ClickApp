@@ -12,7 +12,7 @@ const Nav = () => {
             to="/"
             style={{
               ...styles.navLink,
-              backgroundColor: location.pathname === '/' ? 'black' : '#388e3c', 
+              backgroundColor: location.pathname === '/' ? '#004d26' : '#388e3c', // Darker green when clicked
             }}
           >
             Home
@@ -23,7 +23,7 @@ const Nav = () => {
             to="/schedule"
             style={{
               ...styles.navLink,
-              backgroundColor: location.pathname === '/schedule' ? 'black' : '#388e3c',
+              backgroundColor: location.pathname === '/schedule' ? '#004d26' : '#388e3c',
             }}
           >
             Schedule
@@ -34,7 +34,7 @@ const Nav = () => {
             to="/clicker"
             style={{
               ...styles.navLink,
-              backgroundColor: location.pathname === '/clicker' ? 'black' : '#388e3c',
+              backgroundColor: location.pathname === '/clicker' ? '#004d26' : '#388e3c',
             }}
           >
             Clicker
@@ -48,7 +48,7 @@ const Nav = () => {
 const styles = {
   navBar: {
     backgroundColor: '#388e3c', 
-    padding: '10px 20px',
+    padding: '20px 40px',  // Increased padding for a longer navbar
     position: 'sticky',
     top: 0,
     zIndex: 1000,
@@ -63,10 +63,10 @@ const styles = {
   navLink: {
     color: 'white',
     textDecoration: 'none',
-    padding: '10px 20px',
-    borderRadius: '5px',
+    padding: '12px 25px',
+    borderRadius: '15px', 
     fontSize: '18px',
-    margin: '0 10px',
+    margin: '0 15px',
     transition: 'background-color 0.3s ease',
   },
 };

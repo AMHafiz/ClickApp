@@ -54,7 +54,6 @@ const SchedulePage = ({ schedule }) => {
     <div style={{ padding: '20px' }}>
       <h1 style={{ textAlign: 'center', color: '#4CAF50' }}>Schedule</h1>
       
-      {}
       <div style={{ textAlign: 'center', marginBottom: '20px' }}>
         <button
           onClick={() => handleWeekChange('prev')}
@@ -66,6 +65,7 @@ const SchedulePage = ({ schedule }) => {
             border: 'none',
             borderRadius: '5px',
             cursor: 'pointer',
+            marginBottom: '10px',
           }}
         >
           &lt; Prev
@@ -81,64 +81,65 @@ const SchedulePage = ({ schedule }) => {
             border: 'none',
             borderRadius: '5px',
             cursor: 'pointer',
+            marginBottom: '10px',
           }}
         >
           Next &gt;
         </button>
       </div>
 
-      {}
       <div ref={scheduleRef}>
-        <table
-          style={{
-            width: '100%',
-            textAlign: 'center',
-            borderCollapse: 'collapse',
-            border: '2px solid #ddd',
-            marginTop: '20px',
-          }}
-        >
-          <thead>
-            <tr style={{ backgroundColor: '#4CAF50', color: 'white' }}>
-              <th style={{ padding: '10px', border: '1px solid #ddd' }}>Time</th>
-              {daysOfWeek.map(day => (
-                <th key={day} style={{ padding: '10px', border: '1px solid #ddd' }}>
-                  {day}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {['9:00 AM', '9:30 AM', '10:00 AM', '10:30 AM', '11:00 AM', '11:30 AM', '12:00 PM', '12:30 PM', '1:00 PM', '1:30 PM', '2:00 PM', '2:30 PM', '3:00 PM', '3:30 PM', '4:00 PM', '4:30 PM', '5:00 PM'].map(time => (
-              <tr key={time} style={{ backgroundColor: '#f9f9f9' }}>
-                <td style={{ padding: '10px', border: '1px solid #ddd' }}>{time}</td>
-                {daysOfWeek.map(day => {
-                  const cellData = weekSchedule[day]?.find(slot => slot.time === time);
-                  const isCurrentSlot =
-                    currentDayName === day &&
-                    time === `${currentHour % 12 || 12}:${currentMinute < 30 ? '00' : '30'} ${currentHour < 12 ? 'AM' : 'PM'}`;
-
-                  return (
-                    <td
-                      key={day}
-                      style={{
-                        padding: '10px',
-                        border: '1px solid #ddd',
-                        backgroundColor: isCurrentSlot ? 'lightblue' : 'white',
-                        cursor: 'pointer',
-                      }}
-                    >
-                      {cellData ? cellData.clicks : 0}
-                    </td>
-                  );
-                })}
+        <div style={{ overflowX: 'auto' }}>
+          <table
+            style={{
+              width: '100%',
+              textAlign: 'center',
+              borderCollapse: 'collapse',
+              border: '2px solid #ddd',
+              marginTop: '20px',
+            }}
+          >
+            <thead>
+              <tr style={{ backgroundColor: '#4CAF50', color: 'white' }}>
+                <th style={{ padding: '10px', border: '1px solid #ddd' }}>Time</th>
+                {daysOfWeek.map(day => (
+                  <th key={day} style={{ padding: '10px', border: '1px solid #ddd' }}>
+                    {day}
+                  </th>
+                ))}
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {['9:00 AM', '9:30 AM', '10:00 AM', '10:30 AM', '11:00 AM', '11:30 AM', '12:00 PM', '12:30 PM', '1:00 PM', '1:30 PM', '2:00 PM', '2:30 PM', '3:00 PM', '3:30 PM', '4:00 PM', '4:30 PM', '5:00 PM'].map(time => (
+                <tr key={time} style={{ backgroundColor: '#f9f9f9' }}>
+                  <td style={{ padding: '10px', border: '1px solid #ddd' }}>{time}</td>
+                  {daysOfWeek.map(day => {
+                    const cellData = weekSchedule[day]?.find(slot => slot.time === time);
+                    const isCurrentSlot =
+                      currentDayName === day &&
+                      time === `${currentHour % 12 || 12}:${currentMinute < 30 ? '00' : '30'} ${currentHour < 12 ? 'AM' : 'PM'}`;
+
+                    return (
+                      <td
+                        key={day}
+                        style={{
+                          padding: '10px',
+                          border: '1px solid #ddd',
+                          backgroundColor: isCurrentSlot ? 'lightblue' : 'white',
+                          cursor: 'pointer',
+                        }}
+                      >
+                        {cellData ? cellData.clicks : 0}
+                      </td>
+                    );
+                  })}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
 
-      {}
       <div style={{ textAlign: 'center', marginTop: '20px' }}>
         <button
           onClick={handleDownloadPDF}
@@ -155,6 +156,28 @@ const SchedulePage = ({ schedule }) => {
           Download Schedule as PDF
         </button>
       </div>
+
+      {/* Media query for mobile responsiveness */}
+      <style jsx>{`
+        @media (max-width: 600px) {
+          table {
+            font-size: 12px;
+          }
+          th, td {
+            padding: 8px;
+          }
+          button {
+            font-size: 14px;
+            padding: 8px;
+          }
+          .week-change-buttons {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+          }
+        }
+      `}</style>
     </div>
   );
 };
